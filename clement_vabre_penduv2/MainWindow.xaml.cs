@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.IO;
+using System.Text;
 
 namespace clement_vabre_penduv2
 {
@@ -11,8 +13,8 @@ namespace clement_vabre_penduv2
     {
         public class PenduGame // Créez une classe PenduGame
         {
-            
-            public string[] mots = { "PROGRAMMATION", "INFORMATIQUE", "PENDU", "FENETRE", "CIEL", "POISSON", "DISCORD" }; // Ajoutez des mots
+
+            public string[] mots; // Ajoutez des mots
             public string MotSecret; // Ajoutez un mot secret
             public string MotMasque; // Ajoutez un mot masqué
             public int vies = 6;    // Ajoutez un nombre de vies
@@ -24,9 +26,16 @@ namespace clement_vabre_penduv2
         {
             InitializeComponent();
             penduGame = new PenduGame(); // Initialisez l'instance de PenduGame
+            ChargerMotsDepuisFichier("ressource/mots.txt");
             NouvellePartie(); // Initialise une nouvelle partie
             Reset();
         }
+
+        public void ChargerMotsDepuisFichier(string cheminFichier)
+        {
+             penduGame.mots = File.ReadAllLines(cheminFichier);
+        }
+
 
         public void NouvellePartie() // Créez une méthode pour initialiser une nouvelle partie
         {
@@ -120,9 +129,9 @@ namespace clement_vabre_penduv2
             }
             else if (penduGame.vies == 0) // Si le nombre de vies est égal à 0
             {
-                string musicPath = "ressource/son/loose.mp3"; // Chemin du son
+                string musichemin = "ressource/son/loose.mp3"; // Chemin du son
                 MediaPlayer mediaPlayer = new MediaPlayer(); // Créez une instance de MediaPlayer
-                mediaPlayer.Open(new Uri(musicPath, UriKind.Relative)); // Ouvrez le fichier audio
+                mediaPlayer.Open(new Uri(musichemin, UriKind.Relative)); // Ouvrez le fichier audio
                 mediaPlayer.Play(); // Jouez le son
 
                 MessageBox.Show("Dommage, vous avez perdu. Le mot était : " + penduGame.MotSecret); // Affichez un message de défaite

@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Name="Grid_Title" Background="#3D5A80">
-            <Label x:Name="Jeu_du_pendu" Content="Jeu du pendu" FontSize="36" FontFamily="Arial Black" HorizontalAlignment="Center" Foreground="AliceBlue"/>
+            <Label x:Name="Jeu_du_pendu" Content="Jeu du pendu" FontSize="36" FontFamily="Arial Black" HorizontalAlignment="Center" Grid.Row="0" Foreground="AliceBlue"/>
         </Grid>
 
         <Grid Grid.Row="1" Name="Grid_Middle">
