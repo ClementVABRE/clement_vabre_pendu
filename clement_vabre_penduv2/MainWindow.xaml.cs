@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging; 
+using System.Windows.Media.Imaging;
 
 namespace clement_vabre_penduv2
 {
@@ -11,17 +11,18 @@ namespace clement_vabre_penduv2
     {
         public class PenduGame // Créez une classe PenduGame
         {
-            public string[] mots = { "PROGRAMMATION", "INFORMATIQUE", "PENDU", "FENETRE","CIEL","POISSON","DISCORD" }; // Ajoutez des mots
+            
+            public string[] mots = { "PROGRAMMATION", "INFORMATIQUE", "PENDU", "FENETRE", "CIEL", "POISSON", "DISCORD" }; // Ajoutez des mots
             public string MotSecret; // Ajoutez un mot secret
             public string MotMasque; // Ajoutez un mot masqué
             public int vies = 6;    // Ajoutez un nombre de vies
         }
 
-         PenduGame penduGame; // Créez une instance de PenduGame
+        PenduGame penduGame; // Créez une instance de PenduGame
 
         public MainWindow()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             penduGame = new PenduGame(); // Initialisez l'instance de PenduGame
             NouvellePartie(); // Initialise une nouvelle partie
             Reset();
@@ -31,13 +32,13 @@ namespace clement_vabre_penduv2
         {
 
             Random random = new Random(); // Créez une instance de Random
-            int MotAleatoire = random.Next(penduGame.mots.Length);  
-            penduGame.MotSecret = penduGame.mots[MotAleatoire].ToUpper();  
-            penduGame.MotMasque = new string('*', penduGame.MotSecret.Length); 
-            TB_Display.Text = penduGame.MotMasque; 
-            penduGame.vies = 6;    
-            UpdateVies();
-          
+            int MotAleatoire = random.Next(penduGame.mots.Length); // Générez un nombre aléatoire entre 0 et le nombre de mots
+            penduGame.MotSecret = penduGame.mots[MotAleatoire].ToUpper(); // Récupérez le mot secret
+            penduGame.MotMasque = new string('*', penduGame.MotSecret.Length); // Créez un mot masqué
+            TB_Display.Text = penduGame.MotMasque; // Affichez le mot masqué
+            penduGame.vies = 6;  // Réinitialisez le nombre de vies
+            UpdateVies(); // Mettez à jour les vies 
+
         }
 
         public void Reset() //création d'une méthode pour réinitialiser les boutons
@@ -74,7 +75,7 @@ namespace clement_vabre_penduv2
         {
             if (penduGame.vies <= 0) // Si le nombre de vies est inférieur ou égal à 0, ne faites rien
             {
-                return; 
+                return;
             }
 
             Button bouton = (Button)sender; // Récupérez le bouton cliqué
@@ -100,19 +101,19 @@ namespace clement_vabre_penduv2
 
             if (penduGame.MotMasque == penduGame.MotSecret) // Si le mot masqué est égal au mot secret
             {
-                
+
                 string musicPath = "ressource/son/victoryff.mp3"; // Chemin du son
                 MediaPlayer mediaPlayer = new MediaPlayer(); // Créez une instance de MediaPlayer
                 mediaPlayer.Open(new Uri(musicPath, UriKind.Relative)); // Ouvrez le fichier audio
                 mediaPlayer.Play(); // Jouez le son
-                
-                
+
+
                 MessageBox.Show("Félicitations, vous avez gagné !"); // Affichez un message de victoire
-              
-               
+
+
                 NouvellePartie();
                 Reset();
-                
+
 
 
 
@@ -123,12 +124,12 @@ namespace clement_vabre_penduv2
                 MediaPlayer mediaPlayer = new MediaPlayer(); // Créez une instance de MediaPlayer
                 mediaPlayer.Open(new Uri(musicPath, UriKind.Relative)); // Ouvrez le fichier audio
                 mediaPlayer.Play(); // Jouez le son
-                
+
                 MessageBox.Show("Dommage, vous avez perdu. Le mot était : " + penduGame.MotSecret); // Affichez un message de défaite
-                
-               
-                        
-                
+
+
+
+
                 NouvellePartie();
                 Reset();
 
@@ -143,10 +144,38 @@ namespace clement_vabre_penduv2
             pendu.Source = new ImageSourceConverter().ConvertFromString(imagePath) as ImageSource; // Met à jour l'image
         }
 
-        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        private void RestartButton_Click(object sender, RoutedEventArgs e) // Créez une méthode pour gérer le clic sur le bouton "Recommencer"
         {
-            NouvellePartie();
-           Reset();
+            NouvellePartie(); // Initialisez une nouvelle partie
+            Reset(); // Réinitialisez les boutons
+        }
+
+        //cree un bouton pour ouvirr une aide
+        private void BTN_regle_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Bienvenue dans le jeu du pendu ! \n\nLe but du jeu est de trouver le mot secret en devinant les lettres qui le composent. \n\nPour cela, cliquez sur les lettres que vous pensez être dans le mot secret. \n\nSi vous trouvez toutes les lettres du mot secret, vous gagnez la partie. \n\nSi vous faites 6 erreurs, vous perdez la partie. \n\nBonne chance !", "Aide");
+        }
+
+        
+        private MediaPlayer mediaPlayer = new MediaPlayer();
+        private bool isPlaying = false;
+        private void BTN_Son_Click(object sender, RoutedEventArgs e)
+        {
+        
+           
+            string musicPath = "ressource/son/mariosong.mp3"; // Chemin du son
+
+            if (isPlaying)
+            {
+                mediaPlayer.Stop(); // Arrêtez la lecture si le son est en cours de lecture
+                isPlaying = false;
+            }
+            else
+            {
+                mediaPlayer.Open(new Uri(musicPath, UriKind.Relative)); // Ouvrez le fichier audio
+                mediaPlayer.Play(); // Jouez le son
+                isPlaying = true;
+            }
         }
     }
 }

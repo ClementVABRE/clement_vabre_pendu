@@ -12,9 +12,11 @@
             <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+
         <Grid Grid.Row="0" Name="Grid_Title" Background="#3D5A80">
             <Label x:Name="Jeu_du_pendu" Content="Jeu du pendu" FontSize="36" FontFamily="Arial Black" HorizontalAlignment="Center" Foreground="AliceBlue"/>
         </Grid>
+
         <Grid Grid.Row="1" Name="Grid_Middle">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -121,18 +123,37 @@
             </Grid>
 
             <Grid Grid.Column="2" Background="#3D5A80">
+                <Grid.Resources>
+                    <Style x:Key="MyStyle" TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Background" Value="#98C1D9"/>
+                        <Setter Property="FontSize" Value="40" />
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                        <Style.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10" />
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </Grid.Resources>
+
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+                
+                
+
+                <Image Name="pendu" Source="ressource/image/6.png" Grid.Row="0" Grid.Column="0"  >
 
 
-                <Image Name="pendu" Source="ressource/image/6.png" Grid.RowSpan="2"  >
-                    
-                 
                 </Image>
 
+
+
+                <Button Grid.Row="1" Grid.Column="0" Content="regle" Name="BTN_regle" Click="BTN_regle_Click" Style="{StaticResource MyStyle}" />
 
 
             </Grid>
@@ -142,8 +163,31 @@
 
         </Grid>
         <Grid Grid.Row="2" Background="#98C1D9">
-            <TextBox VerticalAlignment="Center" Name="TB_Display" Height="50" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="8" HorizontalAlignment="Center"  IsReadOnly="True" Width="500"/>
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+
+            <Grid.Resources>
+                <Style x:Key="MyStyle" TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#3D5A80"/>
+                    <Setter Property="FontSize" Value="40" />
+                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    <Style.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10" />
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </Grid.Resources>
+
+            <TextBox VerticalAlignment="Center" Name="TB_Display" Height="50" Grid.Column="0" Grid.ColumnSpan="8" HorizontalAlignment="Center"  IsReadOnly="True" Width="500" FontSize="40"/>
+
+            <Button  Grid.Column="2" Content="Music" Name="BTN_Son"   Click="BTN_Son_Click"  Style="{StaticResource MyStyle}"/>
 
 
         </Grid>
