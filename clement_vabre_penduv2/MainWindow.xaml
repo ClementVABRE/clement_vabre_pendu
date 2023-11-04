@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:clement_vabre_penduv2"
         Title="MainWindow" Height="500" Width="800">
 
-    <Grid>
+    <Grid Background="#3D5A80">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
@@ -25,22 +25,11 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0" Background="#3D5A80">
-                <Grid.Resources>
-                    <Style x:Key="MyStyle" TargetType="{x:Type Button}">
-                        <Setter Property="Margin" Value="5" />
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Background" Value="#98C1D9"/>
-                        <Setter Property="FontSize" Value="40" />
-                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
-                        <Style.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10" />
-                            </Style>
-                        </Style.Resources>
-                    </Style>
-                </Grid.Resources>
 
-                <Button Grid.Row="1" Grid.Column="0"  Content="Restart" Style="{StaticResource MyStyle}"  Name="RestartButton"  Click="RestartButton_Click" />
+                <Image Name="pendu" Source="ressource/image/6.png" Grid.Row="0" Grid.Column="0"  />
+
+
+
 
 
             </Grid>
@@ -143,13 +132,11 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                
-                
 
-                <Image Name="pendu" Source="ressource/image/6.png" Grid.Row="0" Grid.Column="0"  >
+               
+                <Button Grid.Row="0" Grid.Column="0"  Content="Restart" Style="{StaticResource MyStyle}"  Name="RestartButton"  Click="RestartButton_Click" />
 
-
-                </Image>
+               
 
 
 
