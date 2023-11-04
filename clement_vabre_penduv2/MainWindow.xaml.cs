@@ -100,13 +100,17 @@ namespace clement_vabre_penduv2
                     }
                 }
                 TB_Display.Text = penduGame.MotMasque; // Mettez à jour le mot masqué
+               
             }
             else
             {
                 penduGame.vies--; // Retirez une vie
+              
                 UpdateVies(); // Mettez à jour les vies
             }
             ((Button)sender).IsEnabled = false;
+          
+                        
 
             if (penduGame.MotMasque == penduGame.MotSecret) // Si le mot masqué est égal au mot secret
             {
@@ -172,18 +176,21 @@ namespace clement_vabre_penduv2
         {
         
            
-            string musicPath = "ressource/son/mariosong.mp3"; // Chemin du son
+            string source = "ressource/son/mariosong.mp3"; // Chemin du son
 
             if (isPlaying)
             {
                 mediaPlayer.Stop(); // Arrêtez la lecture si le son est en cours de lecture
-                isPlaying = false;
+                isPlaying = false; // Mettez à jour le booléen
+                BTN_Son.Background = Brushes.Green; // Mettez à jour le bouton
             }
             else
             {
-                mediaPlayer.Open(new Uri(musicPath, UriKind.Relative)); // Ouvrez le fichier audio
+                mediaPlayer.Open(new Uri(source, UriKind.Relative)); // Ouvrez le fichier audio
                 mediaPlayer.Play(); // Jouez le son
-                isPlaying = true;
+                isPlaying = true; // Mettez à jour le booléen
+                BTN_Son.Background = Brushes.Red; // Mettez à jour le bouton
+               
             }
         }
     }

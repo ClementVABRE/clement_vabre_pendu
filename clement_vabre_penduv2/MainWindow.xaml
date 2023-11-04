@@ -174,7 +174,7 @@
                 <Style x:Key="MyStyle" TargetType="{x:Type Button}">
                     <Setter Property="Margin" Value="5" />
                     <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="#3D5A80"/>
+                    <Setter Property="Background" Value="Green"/>
                     <Setter Property="FontSize" Value="40" />
                     <Setter Property="TextBlock.TextAlignment" Value="Center" />
                     <Style.Resources>
