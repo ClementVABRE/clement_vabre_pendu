@@ -15,6 +15,7 @@
 
         <Grid Grid.Row="0" Name="Grid_Title" Background="#3D5A80">
             <Label x:Name="Jeu_du_pendu" Content="Jeu du pendu" FontSize="36" FontFamily="Arial Black" HorizontalAlignment="Center" Grid.Row="0" Foreground="AliceBlue"/>
+            <Label x:Name="ScoreLabel" Content="Score" FontSize="30" Foreground="AliceBlue"/>
         </Grid>
 
         <Grid Grid.Row="1" Name="Grid_Middle">
@@ -103,8 +104,8 @@
                     <Button Grid.Row="2" Grid.Column="7" Content="X" Name="BTN_X" Style="{StaticResource MyStyle}" Click="BTN_Click" />
 
                     <!-- Ligne 3 (Nouvelle ligne pour les boutons "Y" et "Z") -->
-                    <Button Grid.Row="3" Grid.Column="0" Content="Y" Name="BTN_Y" Style="{StaticResource MyStyle}" Click="BTN_Click" />
-                    <Button Grid.Row="3" Grid.Column="1" Content="Z" Name="BTN_Z" Style="{StaticResource MyStyle}" Click="BTN_Click" />
+                    <Button Grid.Row="3" Grid.Column="3" Content="Y" Name="BTN_Y" Style="{StaticResource MyStyle}" Click="BTN_Click" />
+                    <Button Grid.Row="3" Grid.Column="4" Content="Z" Name="BTN_Z" Style="{StaticResource MyStyle}" Click="BTN_Click" />
 
                 </Grid>
 

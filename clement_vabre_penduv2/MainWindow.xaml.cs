@@ -1,16 +1,15 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.IO;
-using System.Text;
 
 namespace clement_vabre_penduv2
 {
     public partial class MainWindow : Window
     {
+       
         public class PenduGame // Créez une classe PenduGame
         {
 
@@ -18,6 +17,7 @@ namespace clement_vabre_penduv2
             public string MotSecret; // Ajoutez un mot secret
             public string MotMasque; // Ajoutez un mot masqué
             public int vies = 6;    // Ajoutez un nombre de vies
+            public static int score;
         }
 
         PenduGame penduGame; // Créez une instance de PenduGame
@@ -31,9 +31,9 @@ namespace clement_vabre_penduv2
             Reset();
         }
 
-        public void ChargerMotsDepuisFichier(string cheminFichier)
+        public void ChargerMotsDepuisFichier(string cheminFichier) // Créez une méthode pour charger les mots depuis un fichier
         {
-             penduGame.mots = File.ReadAllLines(cheminFichier);
+            penduGame.mots = File.ReadAllLines(cheminFichier); // Chargez les mots depuis le fichier
         }
 
 
@@ -47,11 +47,14 @@ namespace clement_vabre_penduv2
             TB_Display.Text = penduGame.MotMasque; // Affichez le mot masqué
             penduGame.vies = 6;  // Réinitialisez le nombre de vies
             UpdateVies(); // Mettez à jour les vies 
+            UpdateScore(); // Mettre à jour l'affichage du score
 
         }
 
+
         public void Reset() //création d'une méthode pour réinitialiser les boutons
         {
+           
             BTN_A.IsEnabled = true;
             BTN_B.IsEnabled = true;
             BTN_C.IsEnabled = true;
@@ -79,6 +82,8 @@ namespace clement_vabre_penduv2
             BTN_Y.IsEnabled = true;
             BTN_Z.IsEnabled = true;
         }
+        
+
 
         private void BTN_Click(object sender, RoutedEventArgs e) // Créez une méthode pour gérer les clics sur les boutons
         {
@@ -100,17 +105,17 @@ namespace clement_vabre_penduv2
                     }
                 }
                 TB_Display.Text = penduGame.MotMasque; // Mettez à jour le mot masqué
-               
+
             }
             else
             {
                 penduGame.vies--; // Retirez une vie
-              
+
                 UpdateVies(); // Mettez à jour les vies
             }
             ((Button)sender).IsEnabled = false;
-          
-                        
+
+
 
             if (penduGame.MotMasque == penduGame.MotSecret) // Si le mot masqué est égal au mot secret
             {
@@ -119,22 +124,22 @@ namespace clement_vabre_penduv2
                 MediaPlayer mediaPlayer = new MediaPlayer(); // Créez une instance de MediaPlayer
                 mediaPlayer.Open(new Uri(musicPath, UriKind.Relative)); // Ouvrez le fichier audio
                 mediaPlayer.Play(); // Jouez le son
-
-
+              
                 MessageBox.Show("Félicitations, vous avez gagné !"); // Affichez un message de victoire
 
 
                 NouvellePartie();
                 Reset();
 
-
+                PenduGame.score++;
+                UpdateScore();
 
 
             }
             else if (penduGame.vies == 0) // Si le nombre de vies est égal à 0
             {
-                string musichemin = "ressource/son/loose.mp3"; // Chemin du son
-                MediaPlayer mediaPlayer = new MediaPlayer(); // Créez une instance de MediaPlayer
+                string musichemin = "ressource/son/loose.mp3"; // Crée une variable pour le chemin du son
+                MediaPlayer mediaPlayer = new MediaPlayer(); // Créez une instance de la class MediaPlayer
                 mediaPlayer.Open(new Uri(musichemin, UriKind.Relative)); // Ouvrez le fichier audio
                 mediaPlayer.Play(); // Jouez le son
 
@@ -150,6 +155,10 @@ namespace clement_vabre_penduv2
             }
         }
 
+        private void UpdateScore()
+        {
+            ScoreLabel.Content = "Score : " + PenduGame.score;
+        }
         private void UpdateVies()
         {
             string imagePath = "ressource/image/" + penduGame.vies + ".png"; // Chemin de l'image
@@ -161,21 +170,23 @@ namespace clement_vabre_penduv2
         {
             NouvellePartie(); // Initialisez une nouvelle partie
             Reset(); // Réinitialisez les boutons
+            PenduGame.score = 0; // Réinitialisez le score
         }
 
         //cree un bouton pour ouvirr une aide
-        private void BTN_regle_Click(object sender, RoutedEventArgs e)
+        private void BTN_regle_Click(object sender, RoutedEventArgs e) // Créez une méthode pour gérer le clic sur le bouton "Aide"
         {
             MessageBox.Show("Bienvenue dans le jeu du pendu ! \n\nLe but du jeu est de trouver le mot secret en devinant les lettres qui le composent. \n\nPour cela, cliquez sur les lettres que vous pensez être dans le mot secret. \n\nSi vous trouvez toutes les lettres du mot secret, vous gagnez la partie. \n\nSi vous faites 6 erreurs, vous perdez la partie. \n\nBonne chance !", "Aide");
         }
 
-        
-        private MediaPlayer mediaPlayer = new MediaPlayer();
-        private bool isPlaying = false;
+
+
+        private MediaPlayer mediaPlayer = new MediaPlayer(); // Créez une instance de MediaPlayer
+        private bool isPlaying = false; // Créez un booléen pour savoir si le son est en cours de lecture
         private void BTN_Son_Click(object sender, RoutedEventArgs e)
         {
-        
-           
+
+
             string source = "ressource/son/mariosong.mp3"; // Chemin du son
 
             if (isPlaying)
@@ -190,7 +201,7 @@ namespace clement_vabre_penduv2
                 mediaPlayer.Play(); // Jouez le son
                 isPlaying = true; // Mettez à jour le booléen
                 BTN_Son.Background = Brushes.Red; // Mettez à jour le bouton
-               
+
             }
         }
     }
