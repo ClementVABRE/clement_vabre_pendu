@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -58,7 +58,7 @@ namespace clement_vabre_penduv2
             BTN_A.IsEnabled = true;
             BTN_B.IsEnabled = true;
             BTN_C.IsEnabled = true;
-            BTN_D.IsEnabled = true;
+            BTN_D.IsEnabled = true; 
             BTN_E.IsEnabled = true;
             BTN_F.IsEnabled = true;
             BTN_G.IsEnabled = true;
@@ -146,8 +146,6 @@ namespace clement_vabre_penduv2
                 MessageBox.Show("Dommage, vous avez perdu. Le mot était : " + penduGame.MotSecret); // Affichez un message de défaite
 
 
-
-
                 NouvellePartie();
                 Reset();
 
@@ -168,9 +166,10 @@ namespace clement_vabre_penduv2
 
         private void RestartButton_Click(object sender, RoutedEventArgs e) // Créez une méthode pour gérer le clic sur le bouton "Recommencer"
         {
+            PenduGame.score = 0; // Réinitialisez le score
             NouvellePartie(); // Initialisez une nouvelle partie
             Reset(); // Réinitialisez les boutons
-            PenduGame.score = 0; // Réinitialisez le score
+            
         }
 
         //cree un bouton pour ouvirr une aide
